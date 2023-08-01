@@ -13,7 +13,6 @@
         print(item.s'Caption')
     end)
 ```
-
 ## 结果对象
 > 封装单个数据对象
 
