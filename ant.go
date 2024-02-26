@@ -6,7 +6,7 @@ package wmi
 import (
 	"github.com/go-ole/go-ole"
 	"github.com/vela-ssoc/vela-kit/lua"
-	"github.com/vela-ssoc/vela-kit/xreflect"
+	"github.com/vela-ssoc/vela-kit/reflectx"
 	"time"
 	"unsafe"
 )
@@ -39,7 +39,7 @@ func (a *ant) toArr(L *lua.LState, item *ole.VARIANT) *lua.LTable {
 		n := len(arr)
 		tab := L.CreateTable(n, 0)
 		for i := 0; i < n; i++ {
-			tab.RawSetInt(i, xreflect.ToLValue(arr[i], L))
+			tab.RawSetInt(i, reflectx.ToLValue(arr[i], L))
 		}
 		return tab
 	}
@@ -147,7 +147,7 @@ func (a *ant) Index(L *lua.LState, key string) lua.LValue {
 	case ole.VT_ARRAY:
 		lv = a.toArr(L, item)
 	default:
-		lv = xreflect.ToLValue(item.Value(), L)
+		lv = reflectx.ToLValue(item.Value(), L)
 	}
 	return lv
 }
